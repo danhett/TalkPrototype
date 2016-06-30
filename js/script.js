@@ -2,42 +2,27 @@ var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
-// Toggle between always listening and click-to-listen
 var CONTINUOUS = true;
-
-// This is used to print and work with indexed results
-// in continuous mode, as they're stacked up.
 var inputIndex = 0;
 
-// Setup some example command grammars in groups
-// Typically these would be served from somewhere else.
-var triggers = '#JSGF V1.0; grammar triggers; public <trigger> = OK Bella | OK Kitchen;'
-var commands = '#JSGF V1.0; grammar commands; public <command> = play | pause | repeat | stop | say again;'
-var numbers = '#JSGF V1.0; grammar numbers; public <number> = one | two | three | twenty one | thirty two | a hundred;'
-var steps = '#JSGF V1.0; grammar steps; public <step> = ingredients | summary | main menu;'
-var recipes = '#JSGF V1.0; grammar recipes; public <recipe> = fish fried | fish roasted | fish en papillot | chocolate pot | bean mash | kale;'
+// Keywords
+var keywords = '#JSGF V1.0; grammar keywords; public <keyword> = asthma | COPD | medication;'
 
-// Set up the SpeechRecognition object
+// API setup
 var recognition = new SpeechRecognition();
 recognition.lang = 'en-GB';
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 recognition.continuous = CONTINUOUS;
 
-// Add our grammar objects.
-// The [optional] second param is priority weighting (0-1), defaults to 1 if not provided.
 var speechRecognitionList = new SpeechGrammarList();
-speechRecognitionList.addFromString(triggers, 1);
-speechRecognitionList.addFromString(commands, 1);
-speechRecognitionList.addFromString(numbers, 1);
-speechRecognitionList.addFromString(steps, 1);
-speechRecognitionList.addFromString(recipes, 1);
+speechRecognitionList.addFromString(keywords, 1);
 recognition.grammars = speechRecognitionList;
 
 // Click to listen. In none-continuous mode it'll stop listening when you finish speaking.
-document.body.onclick = function() {
+document.addEventListener("DOMContentLoaded", function() {
   startRecognition();
-}
+});
 
 // Kick the listening off.
 startRecognition = function() {
