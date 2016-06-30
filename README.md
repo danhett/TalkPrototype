@@ -1,2 +1,4 @@
-# TalkPrototype
-Proof of concept dialogue system using the speech recognition API, keyword matching, and naturalised Tracery repsonses
+# Talk demo
+Thing that will listen, understand, and feed back.
+
+In progress.
