@@ -52,7 +52,7 @@ recognition.onresult = function(event) {
 
 
 handleCommand = function(cmd) {
-  //console.log("Handling " + cmd);
+  analyseResponse(cmd);
 }
 
 // Stop the recognition, regardless of if you were understood

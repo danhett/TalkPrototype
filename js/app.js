@@ -1,7 +1,6 @@
-console.log("app");
-
 $(document).ready(function() {
 
+    // Load tracery grammars
     function loadGrammar(name) {
         $("#output").html("");
 
@@ -17,7 +16,6 @@ $(document).ready(function() {
             });
 
             $("#output").append(div);
-
         }
 
     }
